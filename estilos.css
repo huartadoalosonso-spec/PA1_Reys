@@ -1,0 +1,345 @@
+/*
+  Diseño Web - Consolidado 1
+  Alumno: Reys Asencio Brayan Alexander
+  Archivo: estilos.css (estilos de index.html)
+  Tema: página personal
+*/
+
+/* ==========================================================
+   1. VARIABLES CSS (colores, medidas y valores reutilizables)
+   Colores en formato hexadecimal, rgb, rgba y hsl.
+   ========================================================== */
+:root {
+  --color-primario: #1e3a8a;          /* hexadecimal */
+  --color-secundario: #0ea5e9;        /* hexadecimal */
+  --color-acento: rgb(245, 158, 11);  /* rgb */
+  --color-fondo: hsl(220, 20%, 96%);  /* hsl */
+  --color-texto: #1f2937;
+  --color-blanco: #ffffff;
+  --color-sombra: rgba(0, 0, 0, 0.15); /* rgba (con transparencia) */
+  --radio: 8px;
+  --espacio: 1rem;
+  --ancho-max: 1000px;
+  --ancho-lateral: 260px;
+}
+
+/* ==========================================================
+   2. SELECTORES BÁSICOS (universal, elemento, clase, id)
+   ========================================================== */
+* {                                  /* selector universal */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {                               /* selector de elemento */
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;                   /* unidad rem */
+  line-height: 1.6;
+  background-color: #f3f4f6;         /* respaldo para navegadores sin var() */
+  background-color: var(--color-fondo);
+  color: #1f2937;                    /* respaldo */
+  color: var(--color-texto);
+}
+
+h1, h2, h3, h4, h5, h6 {             /* selector agrupado */
+  color: var(--color-primario);
+  line-height: 1.2;
+  margin-bottom: 0.5em;              /* unidad em */
+}
+
+h1 { font-size: 2.2em; }
+h2 { font-size: 1.7em; border-bottom: 3px solid var(--color-secundario); padding-bottom: 0.2em; }
+h3 { font-size: 1.3em; }
+h4 { font-size: 1.15em; }
+h5 { font-size: 1em; }
+h6 { font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; }
+
+p { margin-bottom: var(--espacio); }
+
+.contenedor {                        /* selector de clase */
+  width: 100%;
+  max-width: var(--ancho-max);
+  margin: 0 auto;                    /* centra el contenido */
+  padding: 0 var(--espacio);
+}
+
+#cabecera {                          /* selector de id */
+  background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
+  color: var(--color-blanco);
+  padding-top: 2rem;
+  box-shadow: 0 4px 10px var(--color-sombra);
+}
+
+#cabecera h1 { color: var(--color-blanco); }
+
+.lema {
+  font-size: 1.1rem;
+  font-style: italic;
+}
+
+/* ==========================================================
+   3. MENÚ DE NAVEGACIÓN (combinadores y pseudo-clases)
+   ========================================================== */
+#menu > ul {                         /* combinador de hijo directo (>) */
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-left: 0;
+  padding: 1rem 0;
+}
+
+#menu ul li a {                      /* combinador descendiente (espacio) */
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--color-blanco);
+  text-decoration: none;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--radio);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#menu a:hover,                       /* pseudo-clase :hover (mouse encima) */
+#menu a:focus {                      /* pseudo-clase :focus (teclado) */
+  background-color: var(--color-blanco);
+  color: var(--color-primario);
+}
+
+#menu a:active {                     /* pseudo-clase :active (al hacer clic) */
+  background-color: var(--color-acento);
+  border-color: var(--color-acento);
+}
+
+/* ==========================================================
+   4. MAQUETADO (layout principal con flexbox y calc())
+   ========================================================== */
+.layout {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-start;
+}
+
+#contenido {
+  width: calc(100% - var(--ancho-lateral) - 1.5rem);  /* función calc() */
+}
+
+#lateral {
+  width: var(--ancho-lateral);
+  background-color: var(--color-blanco);
+  border-left: 5px solid var(--color-acento);
+  border-radius: var(--radio);
+  padding: var(--espacio);
+  box-shadow: 0 2px 6px var(--color-sombra);
+}
+
+.bloque {
+  background-color: var(--color-blanco);
+  border: 1px solid #d1d5db;
+  border-radius: var(--radio);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px var(--color-sombra);
+}
+
+.imagen-principal {
+  display: block;
+  width: 100%;                       /* unidad % */
+  max-width: 800px;                  /* unidad px */
+  height: auto;
+  border-radius: var(--radio);
+  margin-bottom: var(--espacio);
+}
+
+/* ==========================================================
+   5. TARJETAS (:nth-child, :first-child, :last-child, :not)
+   ========================================================== */
+.tarjeta {
+  padding: 1rem;
+  margin-bottom: 0.8rem;
+  border: 1px solid #d1d5db;
+  border-radius: var(--radio);
+}
+
+.tarjeta:nth-child(odd)  { background-color: #eff6ff; }  /* filas impares */
+.tarjeta:nth-child(even) { background-color: #fefce8; }  /* filas pares   */
+.tarjeta:first-of-type h3 { color: var(--color-secundario); }
+.tarjeta:last-of-type { margin-bottom: 0; }
+.tarjeta:not(.destacada) { border-left: 5px solid var(--color-secundario); }
+.destacada { border: 2px solid var(--color-acento); }
+
+.tarjeta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px var(--color-sombra);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Rejilla de tarjetas (sección Gustos) */
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.8rem;
+}
+.rejilla .tarjeta { margin-bottom: 0; }
+.tarjeta ul { margin-bottom: 0; }
+
+/* ==========================================================
+   6. TEXTO, LISTAS Y ENLACES
+   ========================================================== */
+h2 + p { font-size: 1.05rem; }        /* combinador de hermano adyacente (+) */
+h3 ~ ul { margin-bottom: 1rem; }      /* combinador de hermano general (~)   */
+
+#inicio p:first-of-type::first-letter {   /* pseudo-elemento: primera letra */
+  font-size: 1.4em;
+  font-weight: bold;
+  color: var(--color-primario);
+}
+
+mark { background-color: #fde68a; padding: 0 3px; }
+code {
+  background-color: #e5e7eb;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.9em;
+}
+
+blockquote {
+  border-left: 4px solid var(--color-acento);
+  background-color: #fffbeb;
+  padding: 0.8rem 1rem;
+  margin-top: 1rem;
+  font-style: italic;
+}
+blockquote footer { font-size: 0.85rem; margin-top: 0.4rem; }
+
+hr { border: 0; border-top: 2px dashed #9ca3af; margin: 1rem 0; }
+
+ol, ul { margin-left: 1.5rem; margin-bottom: 1rem; }
+li { margin-bottom: 0.25rem; }
+li:nth-child(2n) { color: #374151; }
+
+.lista-enlaces { list-style: square; }
+
+a { color: var(--color-secundario); }
+a:hover { color: var(--color-primario); text-decoration: none; }
+
+a[target="_blank"]::after {           /* selector de atributo + pseudo-elemento */
+  content: " ↗";
+}
+
+/* ==========================================================
+   7. FORMULARIO (:focus, :required, :disabled)
+   ========================================================== */
+label {
+  display: inline-block;
+  width: 90px;
+  font-weight: bold;
+  vertical-align: top;
+}
+
+input, textarea {
+  width: calc(100% - 100px);
+  padding: 0.5rem;
+  border: 2px solid #9ca3af;
+  border-radius: var(--radio);
+  font-family: inherit;
+  font-size: 1em;
+}
+
+input:focus,
+textarea:focus {                      /* resalta el campo activo */
+  outline: none;
+  border-color: var(--color-secundario);
+  box-shadow: 0 0 6px rgba(14, 165, 233, 0.6);
+  background-color: #f0f9ff;
+}
+
+input:required { border-left: 6px solid var(--color-acento); }
+
+.boton {
+  padding: 0.6rem 1.5rem;
+  background-color: var(--color-primario);
+  background-color: #0ea5e9\9;        /* HACK 4 (ver sección 9) */
+  color: var(--color-blanco);
+  border: none;
+  border-radius: var(--radio);
+  font-size: 1rem;
+  cursor: pointer;
+}
+.boton:hover { background-color: var(--color-secundario); }
+.boton:focus { outline: 3px solid var(--color-acento); }
+
+/* ==========================================================
+   8. PIE DE PÁGINA
+   ========================================================== */
+#pie {
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+  text-align: center;
+  padding: 1.5rem var(--espacio);
+  margin-top: 2rem;
+}
+#pie p { margin-bottom: 0.3rem; }
+#pie a { color: var(--color-blanco); }
+#pie a:hover { color: var(--color-acento); }
+
+/* ==========================================================
+   9. HACKS CSS (compatibilidad entre navegadores)
+   ========================================================== */
+
+/* HACK 1: Clearfix. Hace que un contenedor "envuelva" a sus hijos flotantes. */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* HACK 2: Star hack (*). Solo lo entienden Internet Explorer 6 y 7. */
+.tarjeta {
+  *zoom: 1;
+}
+
+/* HACK 3: Underscore hack (_). Solo lo entiende Internet Explorer 6. */
+.bloque {
+  _height: 1%;
+}
+
+/* HACK 4: Sufijo \9. Solo lo aplican Internet Explorer 8, 9 y 10.
+   (Se usa en la regla .boton de la sección 7.) */
+
+/* HACK 5: Solo Internet Explorer 10 y 11. */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  #menu > ul { display: block; }
+  #menu ul li { display: inline-block; }
+}
+
+/* HACK 6: Solo Chrome y Safari (motores WebKit). */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .imagen-principal { image-rendering: -webkit-optimize-contrast; }
+}
+
+/* HACK 7: Solo Firefox. */
+@supports (-moz-appearance: none) {
+  input, textarea { font-size: 0.95em; }
+}
+
+/* HACK 8: Respaldo con @supports para navegadores sin flexbox. */
+@supports not (display: flex) {
+  #contenido { float: left; width: 70%; }
+  #lateral { float: right; width: 28%; }
+}
+
+/* ==========================================================
+   10. DISEÑO ADAPTABLE (pantallas pequeñas)
+   ========================================================== */
+@media (max-width: 768px) {
+  .layout { flex-direction: column; }
+  #contenido, #lateral { width: 100%; }
+  #menu > ul { flex-direction: column; }
+  label { display: block; width: 100%; }
+  input, textarea { width: 100%; }
+  h1 { font-size: clamp(1.5rem, 8vw, 2.2rem); }   /* función clamp() */
+}
